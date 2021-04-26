@@ -189,6 +189,16 @@ func (q query) Read(ctx context.Context) (RowIterator, error) {
 	return rowIterator{r}, nil
 }
 
+func (q query) QueryConfig() QueryConfig {
+	queryConfig := q.Query.QueryConfig
+
+	var dst Table
+	if queryConfig.Dst != nil {
+		dst = table{queryConfig.Dst}
+	}
+	return QueryConfig{queryConfig, dst}
+}
+
 func (q query) SetQueryConfig(c QueryConfig) {
 	q.Query.QueryConfig = c.QueryConfig
 	if c.Dst != nil {

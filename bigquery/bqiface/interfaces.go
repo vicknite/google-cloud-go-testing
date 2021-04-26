@@ -110,6 +110,7 @@ type JobIterator interface {
 
 type Query interface {
 	JobIDConfig() *bigquery.JobIDConfig
+	QueryConfig() QueryConfig
 	SetQueryConfig(QueryConfig)
 	Run(context.Context) (Job, error)
 	Read(context.Context) (RowIterator, error)
